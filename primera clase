@@ -1,0 +1,52 @@
+//let nombre = "Henry"
+//let apellido = "Solarte"
+//let ciudad = "Pasto"
+
+//console.log ("hola me llamo " + nombre +" "+ apellido + " y soy de la ciduad de " + ciudad)
+
+const readline = require('readline');
+
+const rl = readline.createInterface({
+  input: process.stdin,
+  output: process.stdout
+});
+
+rl.question('¿Cuál es tu nombre? ', (nombre) => {
+  rl.question('¿Cuál es tu apellido? ', (apellido) => {
+    rl.question('¿De qué ciudad eres? ', (ciudad) => {
+      rl.question('¿Cuál es tu edad? ', (edad) => {
+        const edadNum = parseInt(edad);
+        console.log("hola me llamo " + nombre + " " + apellido + " y soy de la ciudad de " + ciudad);
+
+        if (edadNum < 18) {
+          console.log('Eres menor de edad, no puedes salir');
+          rl.close();
+        } else if (edadNum > 60) {
+          console.log('Eres mayor de 60 años, solo puedes salir acompañado.');
+          rl.question('¿Hace sol? (si/no) ', (sol) => {
+            rl.question('¿Es fin de semana? (si/no) ', (finDeSemana) => {
+              if (sol.toLowerCase() === 'si' && finDeSemana.toLowerCase() === 'si') {
+                console.log('Debes salir acompañado.');
+              } else {
+                console.log('No hace un buen día, es mejor que te quedes en casa');
+              }
+              rl.close();
+            });
+          });
+        } else {
+          console.log('Eres mayor de edad');
+          rl.question('¿Hace sol? (si/no) ', (sol) => {
+            rl.question('¿Es fin de semana? (si/no) ', (finDeSemana) => {
+              if (sol.toLowerCase() === 'si' && finDeSemana.toLowerCase() === 'si') {
+                console.log('Puedes salir.');
+              } else {
+                console.log('No hace un buen día, es mejor que te quedes en casa');
+              }
+              rl.close();
+            });
+          });
+        }
+      });
+    });
+  });
+});
